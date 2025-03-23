@@ -17,8 +17,12 @@ $( document ).ready(function() {
   var theme;
   if ($('meta[name=sleeky_theme]').attr("content") == 'light') {
     theme = "light";
+    // Add the required light stylesheet for the form
+    $('<link/>', {rel: 'stylesheet', href: url + '/assets/css/light.css'}).appendTo('head');
   } else if ($('meta[name=sleeky_theme]').attr("content") == 'dark') {
     theme = "dark";
+    // Add the required dark stylesheet for the form
+    $('<link/>', {rel: 'stylesheet', href: url + '/assets/css/dark.css'}).appendTo('head');
   }
   
   console.log("Theme is", theme)
@@ -45,38 +49,41 @@ $( document ).ready(function() {
     // Index page
     console.log("Index page");
 
-    handleNav()
+    handleNav();
 
-    // Hide YOURLS new URL section
+    // Temporally hide the original form
     $("#new_url").hide();
-
-    // Grab the nonce id
-    var nonce = $("#nonce-add").val();
-
-    // Remove the YOURLS new URL Section
-    $("#new_url").remove();
-
-    // Create the sleeky new URL section from the template
-    $("nav").append($('<div>').load(`${url}/assets/html/form.html`, function () {
-      $("#nonce-add").val(nonce);
-    }));
+    
+    // Update the form values, required stylesheet is added above on theme selection
+    $('#new_url').attr("id","add");
+    $("#add").addClass( "top" );
+    $("#add").css("background-color", "#0d3259"); // Change to suit your color option
+    $("#add-url").attr("placeholder", "Enter URL here");
+    $("#add-keyword").attr("placeholder", "Custom Alias");
+    $('input[name=add-button]').val('Shorten-it');
+    $('label[for=add-url]').html('Long URL');
+    $('label[for=add-keyword]').html('Optional Alias');
+    
+    // Now updated we can unhide the original form with the new id
+    $("#add").show();
+    
   } else if ($("body").hasClass("tools")) {
     // Tools page
     console.log("Tools page");
 
-    handleNav()
+    handleNav();
 
   } else if ($("body").hasClass("plugins")) {
     // Plugins page
     console.log("Plugins page");
 
-    handleNav()
+    handleNav();
 
   } else if ($("body").hasClass("plugin_page_sleeky_settings")) {
     // Tools page
     console.log("Sleeky Settings Page");
 
-    handleNav()
+    handleNav();
 
     $("#ui_selector").val($("#ui_selector").attr("value"));
 
@@ -84,7 +91,7 @@ $( document ).ready(function() {
     // Information page
     console.log("Information page");
 
-    handleNav()
+    handleNav();
 
     $("#historical_clicks li").each(function (index) {
       if (index % 2 != 0) {
