@@ -61,6 +61,7 @@ $( document ).ready(function() {
     $("#add-url").attr("placeholder", "Enter URL here");
     
     $("#add-keyword").attr("placeholder", "Custom Alias");
+    $("#add-keyword").attr("maxlength", "7");
     $('#add-keyword').on('input', function() {
        this.value = this.value.toLowerCase();
     });
