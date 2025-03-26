@@ -55,14 +55,19 @@ $( document ).ready(function() {
     $("#new_url").hide();
     
     // Update the form values, required stylesheet is added above on theme selection
-    $('#new_url').attr("id","add");  // Change the <DIV> id.
-    $("#add").addClass( "top" );  // Add class required.
-    $("#add").css("background-color", "#0d3259"); // Change this to suit your color scheme.
-    $("#add-url").attr("placeholder", "Enter URL here"); // Change placeholder text.
-    $("#add-keyword").attr("placeholder", "Custom Alias"); // Change placeholder text.
-    $('input[name=add-button]').val('Shorten'); // Change button text.
-    $('label[for=add-url]').html('Long URL'); // Change label text.
-    $('label[for=add-keyword]').html('Optional Alias'); // Change label text.
+    $('#new_url').attr("id","add");
+    $("#add").addClass( "top" );
+    $("#add").css("background-color", "#0d3259");
+    $("#add-url").attr("placeholder", "Enter URL here");
+    
+    $("#add-keyword").attr("placeholder", "Custom Alias");
+    $('#add-keyword').on('input', function() {
+       this.value = this.value.toLowerCase();
+    });
+ 
+    $("input[name=add-button]").val("Shorten-it");
+    $("label[for=add-url]").html("Long URL");
+    $("label[for=add-keyword]").html("Optional Alias");
     
     // Now updated we can unhide the original form and show with changes applied.
     $("#add").show();
